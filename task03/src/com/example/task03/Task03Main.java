@@ -2,10 +2,11 @@ package com.example.task03;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 public class Task03Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //здесь вы можете вручную протестировать ваше решение, вызывая реализуемый метод и смотря результат
         // например вот так:
 
@@ -15,7 +16,14 @@ public class Task03Main {
     }
 
     public static String readAsString(InputStream inputStream, Charset charset) throws IOException {
-        // your implementation here
-        return "";
+        if (inputStream == null || charset == null){
+            throw new IllegalArgumentException();
+        }
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, charset);
+        StringBuilder stringBuilder = new StringBuilder();
+        while (inputStreamReader.ready()){
+            stringBuilder.appendCodePoint(inputStreamReader.read());
+        }
+        return stringBuilder.toString();
     }
 }
